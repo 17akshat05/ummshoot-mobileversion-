@@ -43,21 +43,23 @@ function backHome() {
 
 // Game Loop
 function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawTargets();
-    requestAnimationFrame(gameLoop);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before each draw
+    drawTargets(); // Draw targets on the canvas
+    requestAnimationFrame(gameLoop); // Continue the game loop
 }
 
 // Target creation
 function generateTargets() {
+    targets = []; // Clear any existing targets
     for (let i = 0; i < level * 2; i++) {
         targets.push({
             x: Math.random() * (canvas.width - 50),
-            y: Math.random() * (canvas.height - 200),
+            y: Math.random() * (canvas.height - 50),
             type: Math.random() > 0.5 ? 'car' : 'bottle',
             hit: false
         });
     }
+    console.log("Targets generated: ", targets); // Debug: Check if targets are generated
 }
 
 // Draw targets on the canvas
@@ -73,13 +75,15 @@ function drawTargets() {
     });
 }
 
+// Function to draw a car on the canvas
 function drawCar(x, y) {
-    ctx.fillStyle = '#f44336';
+    ctx.fillStyle = 'red'; // Change car color to make it more visible
     ctx.fillRect(x, y, 80, 40);
 }
 
+// Function to draw a bottle on the canvas
 function drawBottle(x, y) {
-    ctx.fillStyle = '#4caf50';
+    ctx.fillStyle = 'blue'; // Change bottle color to make it more visible
     ctx.fillRect(x, y, 30, 50);
 }
 
@@ -118,3 +122,28 @@ function reload() {
             document.getElementById('ammo').innerText = `Ammo: ${ammo}`;
             isReloading = false;
         }, 2000); // Reload time
+    }
+}
+
+// Move to the next level
+function nextLevel() {
+    if (targets.every(target => target.hit)) {
+        level++;
+        document.getElementById('level').innerText = `Level: ${level}`;
+        generateTargets();
+    } else {
+        alert('Clear all targets first!');
+    }
+}
+
+// Buy new gun logic
+function buyGun() {
+    if (points >= gunPrice) {
+        points -= gunPrice;
+        document.getElementById('points').innerText = `Points: ${points}`;
+        gunPrice += 100;
+        document.getElementById('buy-gun').innerText = `Buy Gun (${gunPrice} points)`;
+    } else {
+        alert('Not enough points to buy a new gun!');
+    }
+}
