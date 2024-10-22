@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shooting Game - Mobile Version</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="home-menu">
+        <h1>🔫 Horrific Shooter 🔫</h1>
+        <button id="start-game">Start Game</button>
+        <button id="shop-menu">Shop</button>
+        <p>Points: <span id="total-points">0</span></p>
+    </div>
+
+    <div id="game-container" class="hidden">
+        <div id="info-bar">
+            <p id="level">Level: 1</p>
+            <p id="points">Points: 0</p>
+            <p id="ammo">Ammo: 10</p>
+        </div>
+
+        <canvas id="gameCanvas" width="360" height="480"></canvas>
+
+        <div id="controls">
+            <button id="shoot">Shoot</button>
+            <button id="reload">Reload</button>
+            <button id="next-level">Next Level</button>
+        </div>
+    </div>
+
+    <div id="shop" class="hidden">
+        <h2>Shop</h2>
+        <button id="buy-gun" disabled>Buy Gun (100 points)</button>
+        <button id="back-home">Back to Menu</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
